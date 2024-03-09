@@ -21,18 +21,18 @@ get_child_processes() {
 }
 
 if [ $# -eq 1 ]; then
-    if [ -n "$(pgrep -x $1)" ]; then
-        target_pid=$(pgrep -x $1)
-        get_file_path $target_pid
-        get_child_processes $target_pid
+    if [ -n "$(pgrep -x "$1")" ]; then
+        target_pid=$(pgrep -x "$1")
+        get_file_path "$target_pid"
+        get_child_processes "$target_pid"
     else
         echo "Process not found."
     fi
-elif [ $# -eq 2 ] && [ "$1" == "-p" ]; then
+elif [ $# -eq 2 ] && [ "$1" = "-p" ]; then
     target_pid=$2
     if [ -d "/proc/$target_pid" ]; then
-        get_file_path $target_pid
-        get_child_processes $target_pid
+        get_file_path "$target_pid"
+        get_child_processes "$target_pid"
     else
         echo "Invalid PID."
     fi
